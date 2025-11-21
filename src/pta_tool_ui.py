@@ -3,6 +3,7 @@ import json
 import threading
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
+
 from pta_tool_class import PTAContestGenerator
 
 CONFIG_FILE = "pta_config.json"
@@ -116,7 +117,7 @@ class MainApplication(tk.Tk):
         ttk.Button(toolbar, text="生成XML", command=self.generate_xml).pack(side=tk.RIGHT, padx=2)
 
         # 题目集列表
-        self.tree = ttk.Treeview(self, columns=("id", "name",  "time"), show="headings")
+        self.tree = ttk.Treeview(self, columns=("id", "name", "time"), show="headings")
         self.tree.heading("id", text="ID")
         self.tree.heading("name", text="名称")
         # self.tree.heading("count", text="题目数")
@@ -181,6 +182,7 @@ class MainApplication(tk.Tk):
                     self.status.config(text="生成完成")
             except Exception as e:
                 messagebox.showerror("错误", str(e))
+                print("1")
                 self.status.config(text="生成失败")
 
         threading.Thread(target=_generate, daemon=True).start()
